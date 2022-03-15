@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Users">
+        <template if:true={user.data}>
+
+        </template>
+        <template if:false={user.data}>
+            <p>User list is empty</p>
+        </template>
+    </lightning-card>
+</template>

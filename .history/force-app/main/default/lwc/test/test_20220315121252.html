@@ -3,14 +3,8 @@
         <template if:true={user.data}>
             <ul>
                 <template for:each={user.data} for:item="user">
-                    <li key={user.Id}>
-                        {user.firstName}
-                        {user.lastName}
-                    </li>
-                </template>
-                <template iterator:it={user.data}>
-                    <li key={it.Id}>
-                        {it.value.firstName}
+                    <li>
+                        {user}
                     </li>
                 </template>
             </ul>
