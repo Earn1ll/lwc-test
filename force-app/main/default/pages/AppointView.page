@@ -1,0 +1,92 @@
+<apex:page controller="AppointmentViewController">
+<apex:pageBlock title="Appointmets Table" >  
+<apex:form > 
+<!--  doctor -->
+   
+      <div  styleClass="selectList"  style="margin-left:250px" >
+            {!myText}
+        	<apex:selectList title="Select a doctor" styleClass="selectLists" size="1"  >
+				<apex:selectOptions value="{!DoctorSelectList}"></apex:selectOptions>
+        	</apex:selectList>
+      </div>
+<!-- btn add new doctor -->
+        <apex:pageBlockSection >
+            <apex:commandLink target="_blank" styleClass="btn"
+                   style="text-decoration:none; padding:5px"
+                   action="{!URLFOR($Action.Doctor__c.New)}"
+                   value="Add New Doctor" />
+        </apex:pageBlockSection>
+<!-- Working Hours Start -->
+    <div  styleClass="hStart"  style="margin-left:238px" >
+		<apex:pageBlockSection >
+			<apex:outputText >Working Hours Start:</apex:outputText>
+				<!--<apex:outputField label="Working Hours Start:" value="{!selectedDoctor}" style="float:left"/>-->
+		</apex:pageBlockSection>
+    </div>
+<!-- Working Hours End -->
+    <div  styleClass="hEnd"  style="margin-left:238px" >
+		<apex:pageBlockSection >
+			<apex:outputText >Working Hours End:</apex:outputText>
+				<!--<apex:outputField label="Working Hours End:" value="{!selectedDoctor}" style="float:left"/>-->
+        	</apex:pageBlockSection>
+    </div>
+         <!--Patient--> 
+    <div  styleClass="patient"  style="margin-left:248px" >
+        	{!myText1}
+        	<apex:selectList size="1">
+				<apex:selectOptions value="{!PatientSelectList}"></apex:selectOptions>
+        	</apex:selectList>
+    </div>
+<!-- btn add new patient -->  
+    <apex:pageBlockSection >
+            <apex:commandLink target="_blank" styleClass="btn"
+                              style="text-decoration:none; padding:5px"
+                              action="{!URLFOR($Action.Patient__c.New)}"
+                              value="Add New Patient"/>
+    </apex:pageBlockSection>
+<!-- Appointment date -->
+    <div  styleClass="appDate"  style="margin-left:60px" >
+        <apex:pageBlockSection >
+        	<apex:inputField label="Appointment date" 
+                             value="{!appTime.Appointment_Date__c}"
+                             required="false"/>
+        </apex:pageBlockSection>
+    </div>
+<!-- Duration -->
+    <div  styleClass="duration"  style="margin-left:60px" >
+        <apex:pageBlockSection >
+        <apex:inputField label="Duration in minutes" value="{!appTime.Duration_in_minutes__c}"
+                         required="false"/>
+        </apex:pageBlockSection>
+    </div>    
+<!-- Add new appointment button -->
+<apex:commandLink target="_blank" styleClass="btn"
+                   style="text-decoration:none"
+                   action="{!URLFOR($Action.Appointment__c.New)}"
+                   value="Add New Appointment" />
+   
+    
+<!-- Table -->
+        <apex:pageBlockSection columns="1">
+        	<apex:pageBlockTable value="{!getTable}" var="item">
+                <apex:column headerValue="Action">
+                    <apex:outputLink value="{!URLFOR('/' + item.Id)}" >
+									View
+					</apex:outputLink>
+				</apex:column>
+                <apex:column headerValue="Action" />
+                <apex:column headerValue="Doctor's Name" value="{!item.Doctor__c}" style="text-decoration:none"/>
+                <apex:column headerValue="Patien's Name" value="{!item.Patient__c}" style="text-decoration:none"/>
+                <apex:column headerValue="Date" value="{!item.Appointment_Date__c}"/>
+                <apex:column headerValue="Duration" value="{!item.Duration_in_minutes__c } {!myText2}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+ <!-- Pagination  -->
+            <div align="left" id="button">
+                <apex:commandButton action="{! setList.previous }" value=" Previous " disabled="{!!setList.HasPrevious}" reRender="thisBlock,button" />
+               		 <apex:outputLabel value="Page {! PageNumber } of {! TotalPages }" /> 
+                <apex:commandButton action="{! setList.next }" value=" Next > " disabled="{!!setList.HasNext}" reRender="thisBlock,button" />
+            </div>   
+</apex:form>   
+</apex:pageBlock>    
+</apex:page>

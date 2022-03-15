@@ -1,0 +1,6 @@
+<apex:page >
+    <apex:form >
+        <apex:commandButton action="{!save}" value="Save"/>
+    </apex:form>
+    
+</apex:page>
